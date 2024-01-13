@@ -1,0 +1,17 @@
+# Byte-compiled / optimized / DLL file
+__pychash__/
+*.py[cod]
+*$py.class
+
+#folder
+.idea/
+.pytest_chache/
+
+#reporting
+report/
+
+#logs
+*.log
+
+#secure info
+secure.json
