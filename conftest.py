@@ -1,17 +1,38 @@
 import logging
 import os
 import json
+import allure
 import pytest
-from pytest import fixture
+from pytest import * #fixture, hookimpl
 from playwright.sync_api import sync_playwright
 from page_object.application import App
 from settings import *
+from helpers.web_service import WebService
+from helpers.db import DataBase
 
 @fixture( autouse=True, scope='session' )
 def preconditions():
     logging.info('preconditions started')
     yield
     logging.info('\npostconditions started')
+
+@fixture ( scope = 'session' )
+def get_web_service(request):
+    base_url = request.config.getini('base_url')
+    secure = request.config.getoption('--secure')
+    config = load_config(secure)
+    web = WebService(base_url)
+    web.login(**config['users']['usersRole1'])
+    yield web
+    web.close()
+
+@fixture ( scope = 'session' )
+def get_db(request):
+    path = request.config.getini('db_path')
+    db = DataBase(path)
+    yield db
+    db.close()
+
 
 @fixture ( scope = 'session' )
 def get_playwright():
@@ -39,6 +60,7 @@ def get_browser(get_playwright, request):
     yield bro
     bro.close()
     del os.environ['PWBROWSER']
+
 @fixture ( scope = 'session' )
 def desktop_app(get_browser, request):
     base_url = request.config.getini('base_url')
@@ -54,9 +76,19 @@ def desktop_app_auth(desktop_app, request):
     config = load_config(secure)
     app = desktop_app
     app.goto ( '/login' )
-    app.login (**config)
+    app.login (**config['users']['usersRole1'])
     yield app
 
+@fixture ( scope = 'session' )
+def desktop_app_bob(get_browser, request):
+    base_url = request.config.getini('base_url')
+    secure = request.config.getoption ( '--secure' )
+    config = load_config ( secure )
+    app = App ( get_browser, base_url = base_url, **BROWSER_OPTIONS )
+    app.goto ( '/' )
+    app.login ( **config['users']['usersRole2'] )
+    yield app
+    app.close ()
 
 @fixture ( scope = 'session', params = ['iPhone 11', 'Pixel 2' ] )
 def mobile_app(get_playwright, get_browser, request):
@@ -82,8 +114,29 @@ def mobile_app_auth(mobile_app, request):
     config = load_config(secure)
     app = mobile_app
     app.goto ( '/login' )
-    app.login (**config)
+    app.login (**config['users']['usersRole1'])
     yield app
+
+
+@hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    result = outcome.get_result()
+    # result.when == 'setup' >> 'call' >> 'teardown'
+    setattr(item, f'result_{result.when}', result)
+
+@fixture(scope='function', autouse=True)
+def make_screenshots(request):
+    yield
+    if request.node.result_call.failed:
+        for arg in request.node.funcargs.values():
+            if isinstance(arg, App):
+                allure.attach(
+                    body=arg.page.screenshot(),
+                    name='screenshot',
+                    attachment_type=allure.attachment_type.PNG
+                )
+
 
 def pytest_addoption(parser):
     parser.addoption ( '--secure', action = 'store', default = "secure.json" )
@@ -91,6 +144,7 @@ def pytest_addoption(parser):
     # parser.addoption ( '--browser', action = 'store', default = 'chromium' )
     parser.addini('base_url', help = 'base url of site under test', default="http://127.0.0.1:8000")
     parser.addini ( 'headless', help = 'run browser in headless mode', default = "True" )
+    parser.addini ( 'db_path', help = 'path to db file', default = "C:\\Users\\BeskrovniyA\\PycharmProjects\\pythonProject\\TestMe-TCM\\db.sqlite3" )
 
 def load_config(file):
     config_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), file)
