@@ -16,12 +16,12 @@ Test project to show
 * Make sure playwright version 1.8+ installed
 
 ## Run guide
-CD C:\Users\[your dirrectory]\TestMe-TCM
-python .\manage.py runserver
+* CD C:\Users\[your dirrectory]\TestMe-TCM
+* python .\manage.py runserver
 
 ## Allure report
-allure serve .\report\ --port 3060
+* allure serve .\report\ --port 3060
 
 ## Useful links
-- https://playwright.dev/
-- https://github.com/microsoft/playwright-python
+* https://playwright.dev/
+* https://github.com/microsoft/playwright-python
