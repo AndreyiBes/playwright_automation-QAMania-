@@ -15,11 +15,13 @@ Test project to show
 * Install Python dependency pip install -r requirements.txt
 * Make sure playwright version 1.8+ installed
 
+## Run guide
+CD C:\Users\[your dirrectory]\TestMe-TCM
+python .\manage.py runserver
+
 ## Allure report
 allure serve .\report\ --port 3060
 
-## Run guide
-...
 ## Useful links
 - https://playwright.dev/
 - https://github.com/microsoft/playwright-python
