@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="1" failures="1" skipped="0" tests="15" time="27.382" timestamp="2024-01-14T02:34:34.159789" hostname="ZUK-WN-9HGBVN2"><testcase classname="tests.test_dashboard" name="test_dashboard_data[chromium]" time="7.576" /><testcase classname="tests.test_dashboard" name="test_multiple_roles[chromium]" time="2.624"><failure message="assert False">desktop_app_auth = &lt;page_object.application.App object at 0x000001A17EEFA450&gt;
-desktop_app_bob = &lt;page_object.application.App object at 0x000001A17F30F0E0&gt;
-get_db = &lt;helpers.db.DataBase object at 0x000001A17F3689B0&gt;
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="1" failures="1" skipped="0" tests="15" time="26.213" timestamp="2024-01-14T14:41:27.889411" hostname="ZUK-WN-9HGBVN2"><testcase classname="tests.test_dashboard" name="test_dashboard_data[chromium]" time="6.585" /><testcase classname="tests.test_dashboard" name="test_multiple_roles[chromium]" time="2.549"><failure message="assert False">desktop_app_auth = &lt;page_object.application.App object at 0x000001C6BABE9E50&gt;
+desktop_app_bob = &lt;page_object.application.App object at 0x000001C6BAF90D10&gt;
+get_db = &lt;helpers.db.DataBase object at 0x000001C6BAF925D0&gt;
 
     @allure.title('test_multiple_role')
     def test_multiple_roles(desktop_app_auth, desktop_app_bob, get_db):
@@ -17,7 +17,7 @@ get_db = &lt;helpers.db.DataBase object at 0x000001A17F3689B0&gt;
 &gt;       assert False
 E       assert False
 
-test_dashboard.py:28: AssertionError</failure></testcase><testcase classname="tests.test_demo" name="test_wait_more_30_sec[chromium]" time="3.521" /><testcase classname="tests.test_demo" name="test_ajax[chromium]" time="6.900" /><testcase classname="tests.test_demo" name="test_handlers[chromium]" time="0.452" /><testcase classname="tests.test_location" name="test_location_ok[iPhone 11-chromium]" time="2.043" /><testcase classname="tests.test_mobile" name="test_columns_hidden[iPhone 11-chromium]" time="0.273" /><testcase classname="tests.test_location" name="test_location_ok[Pixel 2-chromium]" time="1.629" /><testcase classname="tests.test_mobile" name="test_columns_hidden[Pixel 2-chromium]" time="0.248" /><testcase classname="tests.test_testcase" name="test_new_testcase[chromium-general test]" time="0.483" /><testcase classname="tests.test_testcase" name="test_new_testcase[chromium-test no description]" time="0.503" /><testcase classname="tests.test_testcase" name="test_new_testcase[chromium-test digits]" time="0.478" /><testcase classname="tests.test_testcase" name="test_testcase_does_not_exist[chromium]" time="0.183" /><testcase classname="tests.test_testcase" name="test_delete_test_case[chromium]" time="0.003"><error message="failed on setup with &quot;AttributeError: module 'requests' has no attribute 'session'&quot;">request = &lt;SubRequest 'get_web_service' for &lt;Function test_delete_test_case[chromium]&gt;&gt;
+test_dashboard.py:28: AssertionError</failure></testcase><testcase classname="tests.test_demo" name="test_wait_more_30_sec[chromium]" time="3.468" /><testcase classname="tests.test_demo" name="test_ajax[chromium]" time="6.880" /><testcase classname="tests.test_demo" name="test_handlers[chromium]" time="0.459" /><testcase classname="tests.test_location" name="test_location_ok[iPhone 11-chromium]" time="1.651" /><testcase classname="tests.test_mobile" name="test_columns_hidden[iPhone 11-chromium]" time="0.369" /><testcase classname="tests.test_location" name="test_location_ok[Pixel 2-chromium]" time="1.768" /><testcase classname="tests.test_mobile" name="test_columns_hidden[Pixel 2-chromium]" time="0.267" /><testcase classname="tests.test_testcase" name="test_new_testcase[chromium-general test]" time="0.606" /><testcase classname="tests.test_testcase" name="test_new_testcase[chromium-test no description]" time="0.461" /><testcase classname="tests.test_testcase" name="test_new_testcase[chromium-test digits]" time="0.479" /><testcase classname="tests.test_testcase" name="test_testcase_does_not_exist[chromium]" time="0.171" /><testcase classname="tests.test_testcase" name="test_delete_test_case[chromium]" time="0.006"><error message="failed on setup with &quot;AttributeError: module 'requests' has no attribute 'session'&quot;">request = &lt;SubRequest 'get_web_service' for &lt;Function test_delete_test_case[chromium]&gt;&gt;
 
     @fixture ( scope = 'session' )
     def get_web_service(request):
@@ -29,11 +29,11 @@ test_dashboard.py:28: AssertionError</failure></testcase><testcase classname="te
 ..\conftest.py:24: 
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
-self = &lt;helpers.web_service.WebService object at 0x000001A17F492AB0&gt;
+self = &lt;helpers.web_service.WebService object at 0x000001C6BB04DD90&gt;
 base_url = 'http://127.0.0.1:8000'
 
     def __init__(self, base_url: str):
 &gt;       self.session = requests.session()
 E       AttributeError: module 'requests' has no attribute 'session'
 
-..\helpers\web_service.py:5: AttributeError</error></testcase><testcase classname="tests.test_mobile" name="test_mobile_git" time="0.214" /></testsuite></testsuites>
+..\helpers\web_service.py:5: AttributeError</error></testcase><testcase classname="tests.test_mobile" name="test_mobile_git" time="0.219" /></testsuite></testsuites>
