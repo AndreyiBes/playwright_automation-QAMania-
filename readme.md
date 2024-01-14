@@ -16,10 +16,13 @@ Test project to show
 * Make sure playwright version 1.8+ installed
 
 ## Run guide
+* Start TestMe-TCM project. Use command line in PyCharm:
 * CD C:\Users\[your dirrectory]\TestMe-TCM
 * python .\manage.py runserver
 
 ## Allure report
+* Use command line in Window Power Shell:
+* CD C:\Users\[your dirrectory]\PLAYWRIGHT_AUTOMATION
 * allure serve .\report\ --port 3060
 
 ## Useful links
